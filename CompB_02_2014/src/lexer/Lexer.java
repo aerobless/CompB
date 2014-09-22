@@ -1,6 +1,6 @@
 package lexer;
 
-// Lexical Analyzer für Clite
+// Lexical Analyzer fï¿½r Clite
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -81,20 +81,19 @@ public class Lexer {
 
 				case '/': // divide oder comment
 					// TODO
-					/* Falls das nächste Zeichen noch ein'/' ist 
+					/* Falls das nï¿½chste Zeichen noch ein'/' ist 
 					 * dann ist die Zeile ein Kommentar 
-					 * und kann überlesen werden!
+					 * und kann ï¿½berlesen werden!
 					 * ca 7 Zeilen Code
 					 */
-					
-					
-					
-					
-					
-					
-					
+					if(nextChar()=='/'){
+						while(nextChar() != eolnCh);
+						ch = nextChar();
+					} else {
+						ch = nextChar();
+						return Token.divideTok;
+					}
 					break;
-
 				case '\'': // char literal
 					char ch1 = nextChar();
 					nextChar(); // get '
