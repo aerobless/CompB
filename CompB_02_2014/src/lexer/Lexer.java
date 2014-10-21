@@ -1,6 +1,6 @@
 package lexer;
 
-// Lexical Analyzer f�r Clite
+// Lexical Analyzer for Clite
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -33,7 +33,7 @@ public class Lexer {
 	}
 
 	private char nextChar() { 
-		// Return: naechstes Zeichen
+		// Return: next char
 		if (ch == eofCh)
 			error("EOF erreicht");
 		col++;
@@ -61,10 +61,10 @@ public class Lexer {
 	public Token next() { 
 		// next Token
 		do {
-			if (isLetter(ch)) { // ident oder keyword
+			if (isLetter(ch)) { // ident or keyword
 				String spelling = concat(letters + digits);
 				return Token.keyword(spelling);
-			} else if (isDigit(ch)) { // int oder float literal
+			} else if (isDigit(ch)) { // int or float literal
 				String number = concat(digits);
 				if (ch != '.') // int Literal
 					return Token.mkIntLiteral(number);
@@ -79,7 +79,7 @@ public class Lexer {
 					ch = nextChar();
 					break;
 
-				case '/': // divide oder comment
+				case '/': // divide or comment
 					// TODO
 					/* Falls das n�chste Zeichen noch ein'/' ist 
 					 * dann ist die Zeile ein Kommentar 

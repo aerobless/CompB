@@ -15,7 +15,7 @@ public enum TokenType {
 	Main, 
 	True, 
 	While, 
-	Eof, 
+	Eof, //was kleiner als EOF ist --> reserviertes Keyword.
 	LeftBrace, RightBrace, 
 	LeftBracket, RightBracket, LeftParen, RightParen, 
 	Semicolon, Comma, Assign, Equals, Less, LessEqual, 

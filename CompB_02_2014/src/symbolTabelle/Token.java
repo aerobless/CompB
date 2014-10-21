@@ -1,19 +1,28 @@
 package symbolTabelle;
 
-// Tokens für Clite
+
+// Tokens for Clite
 
 public class Token {
 	private static final boolean DEBUG = false;
 
 	/*
 	 * in der enum TokenType stehen alle reservierten Worte
-	 * vor dem Symbol für EOF.
+	 * vor dem Symbol for EOF.
 	 */
-	private static final int KEYWORDS = TokenType.Eof.ordinal();
+	private static final int NOF_KEYWORDS = TokenType.Eof.ordinal();
 
-	private static final String[] reserved = new String[KEYWORDS];
-	private static Token[] token = new Token[KEYWORDS];
+	private static final String[] reserved = new String[NOF_KEYWORDS];
+	private static Token[] token = new Token[NOF_KEYWORDS];
 	
+	/*
+	 * Der Lexer braucht kein grosses GedÃ¤chnis da er ja jeweils nur die Tokens via
+	 * .next() an den Parser weitergibt. d.h. private TokenType & String ist alles was
+	 * er konkret weiss.
+	 */
+	private TokenType type;
+	private String value = "";
+
 	/*
 	 * jetzt folgen die einzelnen Token Objekte
 	 */
@@ -51,14 +60,11 @@ public class Token {
 	public static final Token andTok = new Token(TokenType.And, "&&");
 	public static final Token orTok = new Token(TokenType.Or, "||");
 
-	private TokenType type;
-	private String value = "";
-
 	private Token(TokenType t, String v) {
 		type = t;
 		value = v;
 		if (t.compareTo(TokenType.Eof) < 0) {
-			/* Eintragen der reservierten Wörter
+			/* Eintragen der reservierten Wï¿½rter
 			 * in das Array token[]
 			 */
 			// Debug Info: reserviertes Wort
@@ -86,8 +92,8 @@ public class Token {
 			if (DEBUG) System.out.println("[IDENTIFIER] "+ name);
 			return mkIdentTok(name);
 		}
-		// Kleinbuchstaben: könnte Keyword sein
-		for (int i = 0; i < KEYWORDS; i++) {
+		// Kleinbuchstaben: kï¿½nnte Keyword sein
+		for (int i = 0; i < NOF_KEYWORDS; i++) {
 			if (name.equals(reserved[i])) {
 				// Debug Info
 				if (DEBUG) System.out.println("[KEYWORD] "+ name);
@@ -124,7 +130,7 @@ public class Token {
 
 	public static void main(String[] args) {
 		System.out.println("[Token]Ausgabe von EOF und while Tab und ...");
-		System.out.println("Keywords: "+ KEYWORDS);
+		System.out.println("Keywords: "+ NOF_KEYWORDS);
 		System.out.println(eofTok);
 		System.out.println(whileTok);
 		System.out.println(mkIdentTok("alfa"));
