@@ -38,7 +38,6 @@ class Interpreter_Aufgabe_1 {
 	}
 
 	private static int maxargs(ExpList es) {
-		// TODO ----------------------------
 		if(es instanceof PairExpList){
 			PairExpList pex = (PairExpList) es;
 			return Math.max(maxargs(pex.head), maxargs(pex.tail));
@@ -48,7 +47,6 @@ class Interpreter_Aufgabe_1 {
 		} else {
 			return 0;
 		}
-
 	}
 
 	public static void main(String args[]) throws java.io.IOException {

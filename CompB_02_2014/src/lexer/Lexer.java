@@ -59,7 +59,6 @@ public class Lexer {
 	}
 
 	public Token next() { 
-		// next Token
 		do {
 			if (isLetter(ch)) { // ident or keyword
 				String spelling = concat(letters + digits);
@@ -80,8 +79,8 @@ public class Lexer {
 					break;
 
 				case '/': // divide or comment
-					// TODO
-					/* Falls das n�chste Zeichen noch ein'/' ist 
+					// TODO:
+					/* Falls das n$chste Zeichen noch ein'/' ist 
 					 * dann ist die Zeile ein Kommentar 
 					 * und kann �berlesen werden!
 					 * ca 7 Zeilen Code
@@ -161,43 +160,41 @@ public class Lexer {
 		return (c >= '0' && c <= '9');
 	}
 
-	private void check(char c) {
-		ch = nextChar();
-		if (ch != c)
-			error("Unueltiges Zeichen! Erwartet: " + c);
-		ch = nextChar();
-	}
+private void check(char c) {
+	ch = nextChar();
+	if (ch != c)
+		error("Unueltiges Zeichen! Erwartet: " + c);
+	ch = nextChar();
+}
 
-	private Token chkOpt(char c, Token one, Token two) {
-		ch = nextChar();
-		if (ch != c)
-			return one;
-		ch = nextChar();
-		return two;
-	}
+private Token chkOpt(char c, Token one, Token two) {
+	ch = nextChar();
+	if (ch != c)
+		return one;
+	ch = nextChar();
+	return two;
+}
 
-	private String concat(String set) {
-		String r = "";
-		do {
-			r += ch;
-			ch = nextChar();
-		} while (set.indexOf(ch) >= 0);
-		return r;
-	}
+private String concat(String set) {
+	String r = "";
+	do {
+		r += ch;
+		ch = nextChar();
+	} while (set.indexOf(ch) >= 0);
+	return r;
+}
 
-	public void error(String msg) {
-		System.err.print(line);
-		System.err.println("Fehler: Spalte " + col + " " + msg);
+public void error(String msg) {
+	System.err.print(line);
+	System.err.println("Fehler: Spalte " + col + " " + msg);
 		System.exit(1);
 	}
  
 	static public void main(String[] args) {
-		/*
-		 * Source File Quellcode erst einmal ausgeben!
-		 */
-		String fName = "src/programme/hello.cpp";
+		//Quellcode lesen & 1:1 ausgeben.
+		String rawSourceCode = "src/programme/hello.cpp";
 		try {
-			BufferedReader fRead = new BufferedReader(new FileReader(fName));
+			BufferedReader fRead = new BufferedReader(new FileReader(rawSourceCode));
 			String zeile = null;
 			while ((zeile = fRead.readLine()) != null) {
 				System.out.println("[scr]" + zeile);
@@ -207,13 +204,18 @@ public class Lexer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Falls SourceCode als Argument an Main mitgegeben wird:
 		if (args.length == 1) {
-			fName = args[0];
+			rawSourceCode = args[0];
 		}
-		Lexer lexer = new Lexer(fName);
+		
+		//Neuer Lexer, Source Code übergeben, Lexer splitted SC in Tokens.
+		Lexer lexer = new Lexer(rawSourceCode);
 		Token tok = lexer.next();
 		while (tok != Token.eofTok) {
+			//Token ausgeben
 			System.out.println(tok.toString());
+			//Nächstes Token vom Lexer holen
 			tok = lexer.next();
 		}
 	}

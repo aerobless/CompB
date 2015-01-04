@@ -2,7 +2,6 @@ package JavaInterpreterExample;
 
 class Interpreter_Aufgabe_2 {
 	static void interp(Stm s) {
-
 		interpStm(s, null);
 	}
 
