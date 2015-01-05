@@ -23,9 +23,7 @@ public class Token {
 	private TokenType type;
 	private String value = "";
 
-	/*
-	 * jetzt folgen die einzelnen Token Objekte
-	 */
+	//jetzt folgen die einzelnen Token Objekte:
 	public static final Token eofTok = new Token(TokenType.Eof, "<<EOF>>");
 	public static final Token boolTok = new Token(TokenType.Bool, "bool");
 	public static final Token charTok = new Token(TokenType.Char, "char");

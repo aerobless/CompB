@@ -1,13 +1,20 @@
 grammar LexikalischeAusdrücke;
 
-/*Identifier --> Letter{Letter | Digit}*/
-identifier
+//PARSER REGELN beginnen mit Kleinbuchstaben
+//Hier Hello Grammer als Beispiel:
+r: 'hello' ID;
+ID : [a-z]+;
+
+
+//LEXIKALISCHE REGELN beginnt mit Grossbuchstaben
+//Identifier --> Letter{Letter | Digit}
+IDENTIFIER
 	: LETTER (LETTER|DIGIT)*
 	;
 	
 /*Letter -> a|b|..|z|A|B|..|Z*/
 LETTER
-	: 'a'..'z'|'A'..'Z' /*Unklar ob korrekt, keine Lösung */
+	: [a-zA-Z]
 	;
 
 /*Digit -> 0|1|..|9 */
@@ -43,3 +50,11 @@ CharType
 CharLiteral
 	: 'a'..'z'|'A'..'Z'|'0'..'9'
 	;
+
+//Whitespaces und Comments ignorieren
+WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
+
+COMMENT
+    :   '/*' .*? '*/' -> skip
+    ;
